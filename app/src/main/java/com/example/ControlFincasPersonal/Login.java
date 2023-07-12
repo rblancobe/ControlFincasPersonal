@@ -44,70 +44,126 @@ public class Login extends AppCompatActivity {
         Button buttonLogin = findViewById(R.id.buttonLogin);
 
         // Configurar el click listener para el botón LOGIN
-        buttonLogin.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                // Obtener los valores del nombre de usuario y la contraseña ingresados
-                String username = editTextUsername.getText().toString();
-                String password = editTextPassword.getText().toString();
 
-                // Mensajes de depuración
-                //Log.d("Login", "Valor de username: " + 777);
-                //Log.d("Login", "Valor de password: " + 777);
-                //Log.d("Login", "Valor de localUsername: " + localUsername);
-                //Log.d("Login", "Valor de localPassword: " + localPassword);
+        buttonLogin.setOnClickListener(v -> {
+            String username = editTextUsername.getText().toString();
+            String password = editTextPassword.getText().toString();
 
-                // Verificar si los campos están vacíos
-                if (username.isEmpty() || password.isEmpty()) {
-                    Toast.makeText(Login.this, "Por favor, ingrese nombre de usuario y contraseña", Toast.LENGTH_SHORT).show();
-                } else if (username.equals(localUsername) && password.equals(localPassword)) {
-                    // Los datos de inicio de sesión son correctos
+            // Mensajes de depuración
+            //Log.d("Login", "Valor de username: " + 777);
+            //Log.d("Login", "Valor de password: " + 777);
+            //Log.d("Login", "Valor de localUsername: " + localUsername);
+            //Log.d("Login", "Valor de localPassword: " + localPassword);
 
-                    // Redireccionar al activity_main.xml
-                    RequestParams params = new RequestParams();
-                    params.put("imei","");
-                    params.put("usr",username);
-                    params.put("pass",password);
-                    client = new AsyncHttpClient();
+            // Verificar si los campos están vacíos
+            if (username.isEmpty() || password.isEmpty()) {
+                Toast.makeText(Login.this, "Por favor, ingrese nombre de usuario y contraseña", Toast.LENGTH_SHORT).show();
+            } else if (username.equals(localUsername) && password.equals(localPassword)) {
+                // Los datos de inicio de sesión son correctos
 
-                    client.post(utils.service(), params, new AsyncHttpResponseHandler() {
-                        @Override
-                        public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
-                            try {
-                                JSONObject response = new JSONObject(new String(responseBody).trim());
-                                Toast.makeText(context,new String(responseBody),Toast.LENGTH_SHORT).show();
-                                /*String id = response.getString("log");
-                                JSONArray json = new JSONArray(id);
-                                JSONObject obj = json.getJSONObject(0);
-                                String valido = obj.getString("valido");
+                // Redireccionar al activity_main.xml
+                RequestParams params = new RequestParams();
+                params.put("imei","");
+                params.put("usr",username);
+                params.put("pass",password);
+                client = new AsyncHttpClient();
 
-                                if(valido.equals("UN")){
-                                    Toast.makeText(context,"El dispositivo utilizado no está autorizado\r\nContacte con el administrador",Toast.LENGTH_SHORT).show();
-                                }else if(valido.equals("NO")){
-                                    Toast.makeText(context,"Error en Usuario o contraseña",Toast.LENGTH_SHORT).show();
-                                }else{
-                                    goToMain();
-                                }*/
-                            } catch (JSONException e) {
-                                e.printStackTrace();
-                                Toast.makeText(context,"Error JSON OBJ",Toast.LENGTH_SHORT).show();
+                client.post(utils.service(), params, new AsyncHttpResponseHandler() {
+                    @Override
+                    public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
+                        try {
+                            JSONObject response = new JSONObject(new String(responseBody).trim());
+                            Toast.makeText(context,new String(responseBody),Toast.LENGTH_SHORT).show();
+                            String id = response.getString("log");
+                            JSONArray json = new JSONArray(id);
+                            JSONObject obj = json.getJSONObject(0);
+                            String valido = obj.getString("valido");
+
+                            if(valido.equals("UN")){
+                                Toast.makeText(context,"El dispositivo utilizado no está autorizado\r\nContacte con el administrador",Toast.LENGTH_SHORT).show();
+                            }else if(valido.equals("NO")){
+                                Toast.makeText(context,"Error en Usuario o contraseña",Toast.LENGTH_SHORT).show();
+                            }else{
+                                goToMain();
                             }
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                            Toast.makeText(context,"Error JSON OBJ",Toast.LENGTH_SHORT).show();
                         }
+                    }
 
-                        @Override
-                        public void onFailure(int statusCode, Header[] headers, byte[] responseBody, Throwable error) {
-                            Toast.makeText(context,"ERROR RESPONSE",Toast.LENGTH_SHORT).show();
-                        }
-                    });
+                    @Override
+                    public void onFailure(int statusCode, Header[] headers, byte[] responseBody, Throwable error) {
+                        Toast.makeText(context,"ERROR RESPONSE",Toast.LENGTH_SHORT).show();
+                    }
+                });
 
-                    // FIN
-                    //finish();
-                } else {
-                    // Inicio de sesión incorrecto en usr o pass
-                    Toast.makeText(Login.this, "Usuario o contraseña incorrectos", Toast.LENGTH_SHORT).show();
-                }
+                // FIN
+                //finish();
+            } else {
+                // Inicio de sesión incorrecto en usr o pass
+                Toast.makeText(Login.this, "Usuario o contraseña incorrectos", Toast.LENGTH_SHORT).show();
             }
         });
+
+        String username = editTextUsername.getText().toString();
+        String password = editTextPassword.getText().toString();
+
+        // Mensajes de depuración
+        //Log.d("Login", "Valor de username: " + 777);
+        //Log.d("Login", "Valor de password: " + 777);
+        //Log.d("Login", "Valor de localUsername: " + localUsername);
+        //Log.d("Login", "Valor de localPassword: " + localPassword);
+
+        // Verificar si los campos están vacíos
+        if (username.isEmpty() || password.isEmpty()) {
+            Toast.makeText(Login.this, "Por favor, ingrese nombre de usuario y contraseña", Toast.LENGTH_SHORT).show();
+        } else if (username.equals(localUsername) && password.equals(localPassword)) {
+            // Los datos de inicio de sesión son correctos
+
+            // Redireccionar al activity_main.xml
+            RequestParams params = new RequestParams();
+            params.put("imei","");
+            params.put("usr",username);
+            params.put("pass",password);
+            client = new AsyncHttpClient();
+
+            client.post(utils.service(), params, new AsyncHttpResponseHandler() {
+                @Override
+                public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
+                    try {
+                        JSONObject response = new JSONObject(new String(responseBody).trim());
+                        Toast.makeText(context,new String(responseBody),Toast.LENGTH_SHORT).show();
+                        String id = response.getString("log");
+                        JSONArray json = new JSONArray(id);
+                        JSONObject obj = json.getJSONObject(0);
+                        String valido = obj.getString("valido");
+
+                        if(valido.equals("UN")){
+                            Toast.makeText(context,"El dispositivo utilizado no está autorizado\r\nContacte con el administrador",Toast.LENGTH_SHORT).show();
+                        }else if(valido.equals("NO")){
+                            Toast.makeText(context,"Error en Usuario o contraseña",Toast.LENGTH_SHORT).show();
+                        }else{
+                            goToMain();
+                        }
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                        Toast.makeText(context,"Error JSON OBJ",Toast.LENGTH_SHORT).show();
+                    }
+                }
+
+                @Override
+                public void onFailure(int statusCode, Header[] headers, byte[] responseBody, Throwable error) {
+                    Toast.makeText(context,"ERROR RESPONSE",Toast.LENGTH_SHORT).show();
+                }
+            });
+
+            // FIN
+            //finish();
+        } else {
+            // Inicio de sesión incorrecto en usr o pass
+            Toast.makeText(Login.this, "Usuario o contraseña incorrectos", Toast.LENGTH_SHORT).show();
+        }
     }
 
     private  void goToMain(){
