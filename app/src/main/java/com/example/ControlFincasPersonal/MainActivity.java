@@ -44,8 +44,8 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        edit_message = (TextView) findViewById(R.id.edit_message);
-        nfc_contents = (TextView) findViewById(R.id.nfc_contents);
+        //edit_message = (TextView) findViewById(R.id.edit_message);
+        //nfc_contents = (TextView) findViewById(R.id.nfc_contents);
         ActivateButton =  findViewById(R.id.ActivateButton);
         context = this;
         ActivateButton.setOnClickListener(new View.OnClickListener() {
