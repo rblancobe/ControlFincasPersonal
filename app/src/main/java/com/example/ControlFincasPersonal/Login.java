@@ -80,7 +80,7 @@ public class Login extends AppCompatActivity {
                             String valido = obj.getString("valido");
 
                             if(valido.equals("UN")){
-                                Toast.makeText(context,"El dispositivo utilizado no está autorizado\r\nContacte con el administrador",Toast.LENGTH_SHORT).show();
+                             //   Toast.makeText(context,"El dispositivo utilizado no está autorizado\r\nContacte con el administrador",Toast.LENGTH_SHORT).show();
                             }else if(valido.equals("NO")){
                                 Toast.makeText(context,"Error en Usuario o contraseña",Toast.LENGTH_SHORT).show();
                             }else{
